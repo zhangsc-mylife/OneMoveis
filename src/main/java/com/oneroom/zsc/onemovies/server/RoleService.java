@@ -12,4 +12,9 @@ public interface RoleService {
      * 给角色分配资源
      */
     void grant(Integer id,String[] resourceId);
+
+    /**
+     *
+     */
+    int find(Integer id);
 }

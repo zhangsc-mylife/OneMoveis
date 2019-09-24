@@ -61,4 +61,11 @@ public interface UserService  {
      * @return
      */
     boolean delete(int id);
+
+    /**
+     * 给用户分配角色
+     * @param id
+     * @param roleIds
+     */
+    void grant(Integer id, String[] roleIds);
 }

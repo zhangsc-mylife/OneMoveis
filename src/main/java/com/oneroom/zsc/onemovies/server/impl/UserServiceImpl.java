@@ -1,7 +1,9 @@
 package com.oneroom.zsc.onemovies.server.impl;
 
 import com.oneroom.zsc.onemovies.mapper.UserMapper;
+import com.oneroom.zsc.onemovies.model.Role;
 import com.oneroom.zsc.onemovies.model.User;
+import com.oneroom.zsc.onemovies.server.RoleService;
 import com.oneroom.zsc.onemovies.server.UserService;
 import com.oneroom.zsc.onemovies.utils.MD5Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service("")
 @Slf4j
@@ -17,6 +21,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RoleService roleService;
 
 
     @Override
@@ -58,6 +65,12 @@ public class UserServiceImpl implements UserService {
             user.setUpdateTime(new Date());
             user.setDeleteStatus(0);
             user.setUserPwd(MD5Utils.md5Encode(user.getUserPwd()));
+
+            //设定默认分权为用户权限
+            Role role;
+            Set<Role> roles = new HashSet<>();
+            role = roleService.find(2);
+
 
         }
     }
